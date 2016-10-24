@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GIBB_326.iml" filepath="$PROJECT_DIR$/GIBB_326.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BombermanClient.iml" filepath="$PROJECT_DIR$/BombermanClient.iml" />
     </modules>
   </component>
 </project>
