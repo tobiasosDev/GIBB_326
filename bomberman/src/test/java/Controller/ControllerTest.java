@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import org.junit.After;
 import org.junit.Before;
