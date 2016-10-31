@@ -1,3 +1,4 @@
+<<<<<<< HEAD:bomberman/src/main/java/sample/sample.fxml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXDrawersStack?>
@@ -25,3 +26,9 @@
       <JFXDrawersStack prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
+=======
+<?import javafx.scene.layout.GridPane?>
+<GridPane fx:controller="Controller.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+</GridPane>
+>>>>>>> 92615bfe33eb99ce93c0c71b923faf571940a1dd:bomberman/src/main/resources/View/Menu.fxml
