@@ -55,7 +55,7 @@ public class GameCreater {
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
             for (int j = 0; j < labColumns.getLength(); j++) {
-                Node labColumn = labColumns.item(j);
+                Element labColumn = (Element) labColumns.item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
                 jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNodeValue());
