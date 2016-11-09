@@ -2,13 +2,19 @@ package Service;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-/**
- * Created by tobiasluscher on 07.11.16.
- */
+
 public class GameCreater {
 
     private XMLService xmlService;
@@ -49,7 +55,7 @@ public class GameCreater {
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
             for (int j = 0; j < labColumns.getLength(); j++) {
-                private Element labColumn = labColumns.item(j);
+                Node labColumn = labColumns.item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
                 jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNodeValue());
@@ -59,6 +65,20 @@ public class GameCreater {
                 jfxButton.setAttribute("GridPane.columnIndex", "" + j);
                 columnConstraints.appendChild(jfxButton);
             }
+        }
+
+        try {
+            Transformer tr = TransformerFactory.newInstance().newTransformer();
+
+            // send DOM to file
+            tr.transform(new DOMSource(doc),
+                    new StreamResult(new FileOutputStream(getClass().getResource("testField.fxml").toString()));
+                    new StreamResult(new FileOutputStream(getClass().getResource("testField.fxml").toString())));
+
+        } catch (TransformerException te) {
+            System.out.println(te.getMessage());
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
         }
     }
 }
