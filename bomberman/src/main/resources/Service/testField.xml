@@ -1,9 +1,10 @@
-<Meta-Daten>
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDaten>
 	<Breite>3</Breite>
 	<Groesse>3</Groesse>
 	<Name>Test</Name>
-</Meta-Daten>
-<Labyrinth-Daten>
+</MetaDaten>
+<LabyrinthDaten>
 	<Rows>
 		<Tiles>
 			<Type>1</Type>
@@ -37,4 +38,4 @@
 			<Type>1</Type>
 		</Tiles>
 	</Rows>
-</Labyrinth-Daten>
+</LabyrinthDaten>
