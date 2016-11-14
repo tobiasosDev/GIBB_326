@@ -1,10 +1,13 @@
 package Service;
 
+import com.sun.org.apache.xerces.internal.dom.DeferredElementImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -25,16 +28,17 @@ public class GameCreater {
         Document doc = xmlService.convertXMLToDoc(fieldXML);
         Document docF = xmlService.convertXMLToDoc(fXMLField);
 
-        Element metaData = (Element) doc.getElementsByTagName("MetaDaten").item(0);
-        Element labyrinthData = (Element) doc.getElementsByTagName("Labyrinth-Daten").item(0);
-        Element columnConstraints = (Element) doc.getElementsByTagName("columnConstraints").item(0);
-        Element rowConstraints = (Element) doc.getElementsByTagName("rowConstraints").item(0);
-        Element children = (Element) doc.getElementsByTagName("children").item(0);
+        Element root = (Element) doc.getElementsByTagName("Root").item(0);
+        Element metaData = (Element) root.getElementsByTagName("MetaDaten").item(0);
+        Element labyrinthData = (Element) root.getElementsByTagName("LabyrinthDaten").item(0);
+        Element columnConstraints = (Element) docF.getElementsByTagName("columnConstraints").item(0);
+        Element rowConstraints = (Element) docF.getElementsByTagName("rowConstraints").item(0);
+        Element children = (Element) docF.getElementsByTagName("children").item(0);
         NodeList labRows = labyrinthData.getChildNodes();
 
-        int breite = Integer.parseInt(metaData.getChildNodes().item(0).getNodeValue());
-        int groesse = Integer.parseInt(metaData.getChildNodes().item(1).getNodeValue());
-        String name = metaData.getChildNodes().item(2).getNodeValue();
+        int breite = Integer.parseInt(metaData.getElementsByTagName("Breite").item(0).getFirstChild().getNodeValue());
+        int groesse = Integer.parseInt(metaData.getElementsByTagName("Groesse").item(0).getFirstChild().getNodeValue());
+        String name = metaData.getElementsByTagName("Name").item(0).getFirstChild().getNodeValue();
 
         for(int i = 0; i < groesse; i++){
             Element row = docF.createElement("RowConstraints");
@@ -55,10 +59,14 @@ public class GameCreater {
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
             for (int j = 0; j < labColumns.getLength(); j++) {
-                Element labColumn = (Element) labColumns.item(j);
+                Node labColumn = labColumns.item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
-                jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNodeValue());
+                if(labColumn.getNextSibling().getFirstChild().getNextSibling().getFirstChild().getNodeValue() != null){
+                    jfxButton.setAttribute("text", "" + labColumn.getNextSibling().getFirstChild().getNextSibling().getFirstChild().getNodeValue());
+                }else{
+                    jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNextSibling().getFirstChild().getNodeValue());
+                }
                 jfxButton.setAttribute("GridPane.halignment", "CENTER");
                 jfxButton.setAttribute("GridPane.rowIndex", "" + i);
                 jfxButton.setAttribute("GridPane.valignment", "CENTER");
