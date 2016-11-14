@@ -58,15 +58,12 @@ public class GameCreater {
 
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
-            for (int j = 0; j < labColumns.getLength(); j++) {
-                Node labColumn = labColumns.item(j);
+            int lengthOffRows = ((DeferredElementImpl)labColumns).getElementsByTagName("Tiles").getLength();
+            for (int j = 0; j < lengthOffRows; j++) {
+                Node labColumn = ((DeferredElementImpl) labColumns).getElementsByTagName("Tiles").item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
-                if(labColumn.getNextSibling().getFirstChild().getNextSibling().getFirstChild().getNodeValue() != null){
-                    jfxButton.setAttribute("text", "" + labColumn.getNextSibling().getFirstChild().getNextSibling().getFirstChild().getNodeValue());
-                }else{
-                    jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNextSibling().getFirstChild().getNodeValue());
-                }
+                jfxButton.setAttribute("text", "" + labColumn.getChildNodes().item(0).getNextSibling().getChildNodes().item(0).getNodeValue());
                 jfxButton.setAttribute("GridPane.halignment", "CENTER");
                 jfxButton.setAttribute("GridPane.rowIndex", "" + i);
                 jfxButton.setAttribute("GridPane.valignment", "CENTER");
