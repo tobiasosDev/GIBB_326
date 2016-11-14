@@ -58,8 +58,8 @@ public class GameCreater {
 
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
-            int lengthOffRows = ((DeferredElementImpl)labColumns).getElementsByTagName("Tiles").getLength();
-            for (int j = 0; j < lengthOffRows; j++) {
+            int lengthOffRows = ((DeferredElementImpl)labRows.item(i).getChildNodes()).getElementsByTagName("Tiles").getLength();
+            for (int j = 0; j < labColumns.getLength(); j++) {
                 Node labColumn = ((DeferredElementImpl) labColumns).getElementsByTagName("Tiles").item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
