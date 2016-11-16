@@ -21,7 +21,7 @@ public class Main extends Application {
 
     public void displayFMXL(Parent root){
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 300, 300));
         primaryStage.show();
     }
 

@@ -1,5 +1,6 @@
 package Service;
 
+import Predicates.FieldPredicates;
 import com.sun.org.apache.xerces.internal.dom.DeferredElementImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,11 +18,14 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class GameCreater {
 
     public void createMap() throws IOException, SAXException, ParserConfigurationException {
+        FieldPredicates fieldPredicates = new FieldPredicates();
         XMLService xmlService = new XMLService();
         File fieldXML = new File(getClass().getResource("testField.xml").getFile());
         File fXMLField = new File(getClass().getResource("../View/Field.fxml").getFile());
@@ -58,8 +62,10 @@ public class GameCreater {
 
         for (int i = 0; i < labRows.getLength(); i++) {
             NodeList labColumns = labRows.item(i).getChildNodes();
-            int lengthOffRows = ((DeferredElementImpl)labRows.item(i).getChildNodes()).getElementsByTagName("Tiles").getLength();
-            for (int j = 0; j < labColumns.getLength(); j++) {
+            Stream<Node> nodeStream = IntStream.range(0, labColumns.getLength())
+                    .mapToObj(labColumns::item);
+            long lengthOffRows = nodeStream.filter(fieldPredicates.isTiles()).count();
+            for (int j = 0; j < lengthOffRows; j++) {
                 Node labColumn = ((DeferredElementImpl) labColumns).getElementsByTagName("Tiles").item(j);
                 Element jfxButton = docF.createElement("JFXButton");
                 jfxButton.setAttribute("mnemonicParsing", "false");
@@ -74,15 +80,17 @@ public class GameCreater {
 
         try {
             Transformer tr = TransformerFactory.newInstance().newTransformer();
-
+            String location = getClass().getResource("../View/Field.fxml").getPath().toString();
             // send DOM to file
             tr.transform(new DOMSource(doc),
-                    new StreamResult(new FileOutputStream(getClass().getResource("testField.fxml").toString())));
+                    new StreamResult(new FileOutputStream(location) + "/Test.xml"));
 
         } catch (TransformerException te) {
             System.out.println(te.getMessage());
+            te.printStackTrace();
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
+            ioe.printStackTrace();
         }
     }
 }
