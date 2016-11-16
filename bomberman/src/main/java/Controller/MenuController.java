@@ -19,15 +19,6 @@ public class MenuController {
 //    }
     @FXML protected void startGame(ActionEvent event) {
         GameCreater gameCreater = new GameCreater();
-        try {
-            gameCreater.createMap();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
+            //gameCreater.createMap();
     }
 }
