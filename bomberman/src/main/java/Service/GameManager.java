@@ -25,7 +25,17 @@ public class GameManager {
             Server server = Network.getServer();
             server.listen(1000);
             server.addMessageHandler((msg, clientId) -> {
+                GameManager gameManager = new GameManager();
                 System.out.println("Server received message "+msg+" from "+clientId);
+                try {
+                    gameManager.startupClient();
+                } catch (LobbyFullException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClientIdInUseException e) {
+                    e.printStackTrace();
+                }
             });
             //Your application
             ServerStartGameMessage message = new ServerStartGameMessage();
