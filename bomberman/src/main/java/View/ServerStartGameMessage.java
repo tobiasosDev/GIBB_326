@@ -1,7 +1,6 @@
 package View;
 
 import application.network.api.Message;
-import application.network.protocol.Maze;
 
 
 public class ServerStartGameMessage implements Message {

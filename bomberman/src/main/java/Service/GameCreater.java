@@ -1,7 +1,7 @@
 package Service;
 
 
-import application.network.protocol.Field;
+import View.Main;
 import application.network.protocol.Maze;
 import application.network.protocol.StartGame;
 import org.w3c.dom.Document;
@@ -13,8 +13,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 
 public class GameCreater {
 
@@ -37,8 +37,8 @@ public class GameCreater {
 
         for (int i = 0; i < Math.sqrt(maze.getFields().size()); i++) {
             Element column = docF.createElement("ColumnConstraints");
-            column.setAttribute("minHeight", "10.0");
-            column.setAttribute("prefHeight", "30.0");
+            column.setAttribute("minWidth", "10.0");
+            column.setAttribute("prefWidth", "30.0");
             column.setAttribute("hgrow", "SOMETIMES");
             columnConstraints.appendChild(column);
         }
@@ -46,21 +46,26 @@ public class GameCreater {
         maze.getFields().stream().forEach(field -> {
             Element jfxButton = docF.createElement("JFXButton");
             jfxButton.setAttribute("mnemonicParsing", "false");
-            jfxButton.setAttribute("text", "" + field.getContent());
+            jfxButton.setAttribute("text", field.getContent().toString());
             jfxButton.setAttribute("GridPane.halignment", "CENTER");
             jfxButton.setAttribute("GridPane.rowIndex", "" + field.getPositionY());
             jfxButton.setAttribute("GridPane.valignment", "CENTER");
             jfxButton.setAttribute("GridPane.columnIndex", "" + field.getPositionX());
-            columnConstraints.appendChild(jfxButton);
+            children.appendChild(jfxButton);
         });
 
+        //StringReader strReader = new StringReader(docF.toString());
+
+
         try {
-            String location = getClass().getResource("../View/Field.fxml").getPath().toString();
+            String location = getClass().getResource("../View/Field.fxml").getPath().toString().replaceAll("/Field.fxml", "");
             // send DOM to file
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             Result output = new StreamResult(new File(location +"/Test.fxml"));
             Source input = new DOMSource(docF);
             transformer.transform(input, output);
+            Main main = new Main();
+            main.showMaze();
 
         } catch (TransformerException te) {
             System.out.println(te.getMessage());
