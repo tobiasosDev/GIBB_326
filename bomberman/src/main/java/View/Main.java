@@ -38,11 +38,11 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+            loader.setLocation(getClass().getResource("Menu.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(rootLayout, 800, 800);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
