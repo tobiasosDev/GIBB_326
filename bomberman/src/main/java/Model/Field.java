@@ -5,23 +5,16 @@ package Model;
  */
 public class Field {
 
-    private static Field instance = null;
-
-    protected Field() {
-        // Exists only to defeat instantiation.
-    }
-
     private GameElement[] gameElements;
     private int size;
+
+    public Field(GameElement[] gameElements, int size) {
+        this.gameElements = gameElements;
+        this.size = size;
+    }
 
     public void draw(){
 
     }
 
-    public static Field getInstance() {
-        if(instance == null) {
-            instance = new Field();
-        }
-        return instance;
-    }
 }
