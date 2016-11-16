@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
 
 //    @Override
@@ -23,8 +23,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Bomberman");
+        Main.primaryStage = primaryStage;
+        Main.primaryStage.setTitle("Bomberman");
 
         initRootLayout();
     }
@@ -49,29 +49,15 @@ public class Main extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
-     */
-    public void showMaze() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("Test.fxml"));
-            BorderPane personOverview = (BorderPane) loader.load();
-
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Returns the main stage.
      *
      * @return
      */
-    public Stage getPrimaryStage() {
+    public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+    public static void setPrimaryStage(Stage stage){
+        primaryStage = stage;
     }
 
     public static void main(String[] args) {

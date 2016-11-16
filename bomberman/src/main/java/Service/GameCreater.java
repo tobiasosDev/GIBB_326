@@ -4,6 +4,10 @@ package Service;
 import View.Main;
 import application.network.protocol.Maze;
 import application.network.protocol.StartGame;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -14,7 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 
 public class GameCreater {
 
@@ -61,16 +64,33 @@ public class GameCreater {
             String location = getClass().getResource("../View/Field.fxml").getPath().toString().replaceAll("/Field.fxml", "");
             // send DOM to file
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(new File(location +"/Test.fxml"));
+            Result output = new StreamResult(new File(location + "/Test.fxml"));
             Source input = new DOMSource(docF);
             transformer.transform(input, output);
-            Main main = new Main();
-            main.showMaze();
-
+            showMaze();
         } catch (TransformerException te) {
             System.out.println(te.getMessage());
             te.printStackTrace();
         }
-
     }
+
+    /**
+     * Shows the person overview inside the root layout.
+     */
+    public void showMaze() {
+        try {
+            // Load person overview.
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../View/Test.fxml"));
+            BorderPane personOverview = (BorderPane) loader.load();
+            Scene scene = new Scene(personOverview, 800, 800);
+            Main.getPrimaryStage().setScene(scene);
+            Main.getPrimaryStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+

@@ -1,6 +1,6 @@
 package Service;
 
-import View.ServerStartGameMessage;
+import Model.ServerStartGameMessage;
 import application.network.api.Network;
 import application.network.api.client.ClientIdInUseException;
 import application.network.api.client.LobbyFullException;
