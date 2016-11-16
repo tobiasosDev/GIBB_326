@@ -8,4 +8,8 @@ public class GameMode {
     private double time;
     private int rounds;
 
+    public GameMode(double time, int rounds) {
+        this.time = time;
+        this.rounds = rounds;
+    }
 }

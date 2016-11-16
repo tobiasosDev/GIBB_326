@@ -21,6 +21,7 @@ public class MenuController {
         GameCreater gameCreater = new GameCreater();
         try {
             gameCreater.createMap();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {

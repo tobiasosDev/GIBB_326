@@ -6,4 +6,9 @@ package Model;
 public class Key {
     private char key;
     private PlayerFunctions functions;
+
+    public Key(char key, PlayerFunctions functions) {
+        this.key = key;
+        this.functions = functions;
+    }
 }

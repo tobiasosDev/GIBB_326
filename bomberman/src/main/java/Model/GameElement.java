@@ -8,6 +8,11 @@ public class GameElement {
     private byte[] graphics;
     private float size;
 
+    public GameElement(byte[] graphics, float size) {
+        this.graphics = graphics;
+        this.size = size;
+    }
+
     public void draw(){
 
     }

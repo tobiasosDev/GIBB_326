@@ -7,6 +7,11 @@ public class Player extends Figure{
 
     private Gear gear;
 
+    public Player(byte[] graphics, float size, String name, String farbe, PlayerFunctions currentFunction, Gear gear) {
+        super(graphics, size, name, farbe, currentFunction);
+        this.gear = gear;
+    }
+
     public void move (PlayerFunctions direction){
 
     }
