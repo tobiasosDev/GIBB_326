@@ -4,6 +4,7 @@ package Controller;
  * Created by lukas on 09.11.2016.
  */
 import Service.GameCreater;
+import Service.GameManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -18,7 +19,11 @@ public class MenuController {
 //
 //    }
     @FXML protected void startGame(ActionEvent event) {
-        GameCreater gameCreater = new GameCreater();
-            //gameCreater.createMap();
+        GameManager gameManager = new GameManager();
+        try {
+            gameManager.startupServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
