@@ -1,6 +1,9 @@
 package Service;
 
 import Model.*;
+import javafx.scene.input.KeyCode;
+
+import java.util.ArrayList;
 
 /**
  * Created by lukas on 16.11.2016.
@@ -14,13 +17,13 @@ public class FieldService {
     private GameMode gameMode;
 
     private FieldService() {
+        ArrayList<Key> keys = new ArrayList<>();
+        keys.add( new Key(KeyCode.W, PlayerFunctions.UP));
+        keys.add( new Key(KeyCode.S, PlayerFunctions.DOWN));
+        keys.add( new Key(KeyCode.D, PlayerFunctions.RIGHT));
+        keys.add( new Key(KeyCode.A, PlayerFunctions.LEFT));
+        keys.add( new Key(KeyCode.SHIFT, PlayerFunctions.DROPBOMB));
 
-        Key up = new Key('w', PlayerFunctions.UP);
-        Key down = new Key('s', PlayerFunctions.DOWN);
-        Key right = new Key('d', PlayerFunctions.RIGHT);
-        Key left = new Key('a', PlayerFunctions.LEFT);
-        Key drop = new Key(' ', PlayerFunctions.DROPBOMB);
-        Key[] keys = {up, down, right, left, drop};
 
         this.gear = new Gear(true, keys);
 
@@ -51,7 +54,7 @@ public class FieldService {
         this.gameMode = gameMode;
     }
 
-    public FieldService getInstance(){
+    public static FieldService getInstance(){
         return fieldService;
     }
 }
