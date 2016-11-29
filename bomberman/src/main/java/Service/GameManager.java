@@ -1,5 +1,6 @@
 package Service;
 
+import Controller.MessageFactory;
 import Model.ServerStartGameMessage;
 import application.network.api.Network;
 import application.network.api.client.ClientIdInUseException;
@@ -49,18 +50,10 @@ public class GameManager {
         {
             MockMaceGenerater mockMaceGenerater = new MockMaceGenerater();
             ServerProxy client = Network.getClient();
+            MessageFactory messageFactory = new MessageFactory();
             client.connect("test-client", "localhost", 1000);
             client.addMessageHandler(msg -> {
-                GameCreater creater = new GameCreater();
-                try {
-                    creater.createMaze((StartGame) msg);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                }
+                messageFactory.executeMessageMethod(msg);
             });
 
             StartGame startGame = new StartGame();

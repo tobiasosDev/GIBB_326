@@ -13,8 +13,8 @@ public class MockMaceGenerater {
 
     public Maze createMockMace(){
         List<Field> fields = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 Field field = new Field();
                 field.setContent(Field.Content.WALL);
                 field.setPositionX(j);

@@ -4,6 +4,8 @@ package Service;
 import View.Main;
 import application.network.protocol.Maze;
 import application.network.protocol.StartGame;
+import application.network.protocol.UpdateGame;
+import com.sun.tools.javadoc.Start;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -21,8 +23,31 @@ import java.io.IOException;
 
 public class GameCreater {
 
-    public void createMaze(StartGame startGame) throws IOException, SAXException, ParserConfigurationException {
-        Maze maze = startGame.getMaze();
+    public void createMaze(UpdateGame updateGame){
+        try {
+            createMaze(updateGame.getMaze());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createMaze(StartGame updateGame){
+        try {
+            createMaze(updateGame.getMaze());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createMaze(Maze maze) throws IOException, SAXException, ParserConfigurationException {
         XMLService xmlService = new XMLService();
         File fXMLField = new File(getClass().getResource("../View/Field.fxml").getFile());
         Document docF = xmlService.convertXMLToDoc(fXMLField);
