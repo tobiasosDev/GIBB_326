@@ -3,8 +3,6 @@ package Controller;
 import Service.GameCreater;
 import application.network.api.Message;
 import application.network.protocol.PlayerJoined;
-import application.network.protocol.StartGame;
-import application.network.protocol.UpdateGame;
 
 
 /**
@@ -25,6 +23,8 @@ public class MessageFactory {
             creater.createMaze((StartGame) message);
 
         } else if(message instanceof PlayerJoined){
+
+        } else if(message instanceof PlayerMoved){
 
         }
     }

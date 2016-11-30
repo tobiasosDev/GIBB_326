@@ -1,8 +1,11 @@
 package Service;
 
 import Model.*;
+import Predicates.PlayerPredicates;
+import application.network.protocol.Maze;
 import javafx.scene.input.KeyCode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +15,11 @@ public class FieldService {
 
     private static  FieldService fieldService = new FieldService();
 
-    private Field field;
+    private Maze maze;
     private Gear gear;
     private GameMode gameMode;
+    private ArrayList<Player> players;
+    private String playerName;
 
     private FieldService() {
         ArrayList<Key> keys = new ArrayList<>();
@@ -30,12 +35,12 @@ public class FieldService {
         this.gameMode = new GameMode(60000, 3);
     }
 
-    public Field getField() {
-        return field;
+    public Maze getMaze() {
+        return maze;
     }
 
-    public void setField(Field field) {
-        this.field = field;
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 
     public Gear getGear() {
@@ -52,6 +57,22 @@ public class FieldService {
 
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public Player getPlayer(String playerName) {
+        return players.stream().filter(PlayerPredicates.isPlayer(playerName)).findFirst().get();
+    }
+
+    public void setPlayers(Player player) {
+        this.players.add(player);
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public static FieldService getInstance(){

@@ -4,13 +4,12 @@ package Model;
  * Created by lukas on 08.11.2016.
  */
 public enum PlayerFunctions implements PlayerFunctionsImp{
+
     UP{
         @Override
         public void action() {
             //move up
             System.out.println("up");
-
-
         }
     }, DOWN {
         @Override

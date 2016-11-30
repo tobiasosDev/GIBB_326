@@ -3,32 +3,36 @@ package Model;
 /**
  * Created by lukas on 08.11.2016.
  */
-public class Player extends Figure{
+public class Player extends GameElement{
 
-    private Gear gear;
+    private String name;
+    private int x;
+    private int y;
 
-    public Player(byte[] graphics, float size, String name, String farbe, PlayerFunctions currentFunction, Gear gear) {
-        super(graphics, size, name, farbe, currentFunction);
-        this.gear = gear;
+    public Player(byte[] graphics, float size, String name, int x, int y) {
+        super(graphics, size);
+        this.name = name;
+        this.x = x;
+        this.y = y;
     }
 
-    public void move (PlayerFunctions direction){
-
+    public int getX() {
+        return x;
     }
 
-    public void aktion (PlayerFunctions function){
-
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public void dropBomb(){
-
+    public int getY() {
+        return y;
     }
 
-    public void joinGame(){
-
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public void startGame(){
-
+    public String getName() {
+        return name;
     }
 }
