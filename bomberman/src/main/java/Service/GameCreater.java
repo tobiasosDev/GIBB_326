@@ -109,6 +109,7 @@ public class GameCreater {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("../View/Test.fxml"));
             BorderPane personOverview = (BorderPane) loader.load();
+            Main.setMazeLayout(personOverview);
             Scene scene = new Scene(personOverview, 800, 800);
             Main.getPrimaryStage().setScene(scene);
             Main.getPrimaryStage().show();

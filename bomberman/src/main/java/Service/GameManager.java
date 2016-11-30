@@ -2,6 +2,7 @@ package Service;
 
 import Controller.MessageFactory;
 import Model.ServerStartGameMessage;
+import View.Main;
 import application.network.api.Network;
 import application.network.api.client.ClientIdInUseException;
 import application.network.api.client.LobbyFullException;
@@ -58,6 +59,8 @@ public class GameManager {
 
             StartGame startGame = new StartGame();
             startGame.setMaze(mockMaceGenerater.createMockMace());
+
+
 
             MockServerProxy.simulateMessage(startGame);
 
