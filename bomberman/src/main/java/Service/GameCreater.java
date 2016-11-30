@@ -5,7 +5,6 @@ import View.Main;
 import application.network.protocol.Maze;
 import application.network.protocol.StartGame;
 import application.network.protocol.UpdateGame;
-import com.sun.tools.javadoc.Start;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +25,7 @@ public class GameCreater {
     public void createMaze(UpdateGame updateGame){
         try {
             createMaze(updateGame.getMaze());
+            FieldService.getInstance().setMaze(updateGame.getMaze());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {

@@ -21,7 +21,10 @@ public class Gear {
 
     public void triggerAction(KeyCode key){
         if(aktive){
-            keys.stream().filter(KeyPredicates.isKey(key)).findFirst().get().getPlayerFunctions().action();
+            Key key1 = keys.stream().filter(KeyPredicates.isKey(key)).findFirst().get();
+            if(key1 != null) {
+                key1.getPlayerFunctions().action();
+            }
         }
     }
 }
