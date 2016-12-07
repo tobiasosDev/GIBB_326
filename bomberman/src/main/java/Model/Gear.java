@@ -3,10 +3,7 @@ package Model;
 import Predicates.KeyPredicates;
 import javafx.scene.input.KeyCode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * Created by lukas on 08.11.2016.
