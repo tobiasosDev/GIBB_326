@@ -66,7 +66,6 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Menu.fxml"));
             rootLayout = (BorderPane) loader.load();
-            rootLayout.getChildren().addAll(getOverlay());
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout, 800, 800);
             primaryStage.setScene(scene);
@@ -74,23 +73,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private Pane getOverlay() {
-        StackPane p = new StackPane();
-        Rectangle r = RectangleBuilder.create()
-                .height(1000).width(1000)
-                .arcHeight(40).arcWidth(40)
-                .stroke(Color.RED)
-                .fill(Color.web("red", 0.1))
-                .build();
-
-        Text txt= TextBuilder.create().text("Overlay")
-                .font(Font.font("Arial", FontWeight.BOLD, 18))
-                .fill(Color.BLUE)
-                .build();
-        p.getChildren().addAll(r, txt);
-        return p;
     }
 
     /**

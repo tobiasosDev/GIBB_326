@@ -10,6 +10,7 @@ import application.network.api.client.ServerProxy;
 import application.network.api.server.Server;
 import application.network.mock.MockServer;
 import application.network.mock.MockServerProxy;
+import application.network.protocol.PlayerJoined;
 import application.network.protocol.StartGame;
 import org.xml.sax.SAXException;
 
@@ -60,9 +61,19 @@ public class GameManager {
             StartGame startGame = new StartGame();
             startGame.setMaze(mockMaceGenerater.createMockMace());
 
+            PlayerJoined playerJoined = new PlayerJoined();
+            playerJoined.setPlayerName("Test");
+            playerJoined.setPositionX(2);
+            playerJoined.setPositionY(3);
 
+            PlayerJoined playerJoined2 = new PlayerJoined();
+            playerJoined2.setPlayerName("Test2");
+            playerJoined2.setPositionX(4);
+            playerJoined2.setPositionY(5);
 
             MockServerProxy.simulateMessage(startGame);
+            MockServerProxy.simulateMessage(playerJoined);
+            MockServerProxy.simulateMessage(playerJoined2);
 
             client.disconnect();
         }

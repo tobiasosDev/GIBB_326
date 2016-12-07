@@ -1,5 +1,7 @@
 package Model;
 
+import Service.FieldService;
+
 /**
  * Created by lukas on 08.11.2016.
  */
@@ -9,25 +11,29 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
         @Override
         public void action() {
             //move up
-            System.out.println("up");
+            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
+            player.setY(player.getY()-1);
         }
     }, DOWN {
         @Override
         public void action() {
             //move down
-            System.out.println("down");
+            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
+            player.setY(player.getY()+1);
         }
     }, LEFT {
         @Override
         public void action() {
             //move left
-            System.out.println("left");
+            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
+            player.setX(player.getX()-1);
         }
     }, RIGHT {
         @Override
         public void action() {
             //move right
-            System.out.println("right");
+            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
+            player.setX(player.getX()+1);
         }
     }, DROPBOMB {
         @Override

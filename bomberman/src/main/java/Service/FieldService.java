@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lukas on 16.11.2016.
@@ -18,7 +19,9 @@ public class FieldService {
     private Maze maze;
     private Gear gear;
     private GameMode gameMode;
-    private ArrayList<Player> players;
+
+
+    private List<Player> players = new ArrayList<>();
     private String playerName;
 
     private FieldService() {
@@ -33,6 +36,7 @@ public class FieldService {
         this.gear = new Gear(true, keys);
 
         this.gameMode = new GameMode(60000, 3);
+        this.playerName = "Test";
     }
 
     public Maze getMaze() {
@@ -51,6 +55,10 @@ public class FieldService {
         this.gear = gear;
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     public GameMode getGameMode() {
         return gameMode;
     }
@@ -63,7 +71,7 @@ public class FieldService {
         return players.stream().filter(PlayerPredicates.isPlayer(playerName)).findFirst().get();
     }
 
-    public void setPlayers(Player player) {
+    public void addPlayer(Player player) {
         this.players.add(player);
     }
 

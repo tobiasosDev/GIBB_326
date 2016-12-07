@@ -3,14 +3,13 @@ package Model;
 /**
  * Created by lukas on 08.11.2016.
  */
-public class Player extends GameElement{
+public class Player{
 
     private String name;
     private int x;
     private int y;
 
-    public Player(byte[] graphics, float size, String name, int x, int y) {
-        super(graphics, size);
+    public Player(String name, int x, int y) {
         this.name = name;
         this.x = x;
         this.y = y;
