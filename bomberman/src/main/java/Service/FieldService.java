@@ -18,7 +18,7 @@ public class FieldService {
     private Maze maze;
     private Gear gear;
     private GameMode gameMode;
-    private ArrayList<Player> players;
+    private ArrayList<Player> players = new ArrayList<>();
     private String playerName;
 
     private FieldService() {
