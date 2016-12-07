@@ -3,9 +3,7 @@ package Model;
 import Predicates.KeyPredicates;
 import javafx.scene.input.KeyCode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by lukas on 08.11.2016.
@@ -21,7 +19,7 @@ public class Gear {
 
     public void triggerAction(KeyCode key){
         if(aktive){
-            Key key1 = keys.stream().filter(KeyPredicates.isKey(key)).findFirst().get();
+            Key key1 = keys.stream().filter(KeyPredicates.isKey(key)).findFirst().orElse(null);
             if(key1 != null) {
                 key1.getPlayerFunctions().action();
             }
