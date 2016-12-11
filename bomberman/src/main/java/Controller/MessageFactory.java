@@ -33,9 +33,8 @@ public class MessageFactory {
             displayAllElementsService.displayAll();
 
         } else if(message instanceof PlayerMoved){
-            //Todo
-            //Validation of Movement
-            //FieldService.getInstance().getPlayer(((PlayerMoved) message).getPlayerName()).setY();
+            setPositionFromMessage((PlayerMoved) message, FieldService.getInstance().getPlayer(((PlayerMoved) message).getPlayerName()));
+            displayAllElementsService.displayAll();
         } else if(message instanceof BombDropped){
             BombDropped bombDropped = (BombDropped)message;
             Bomb bomb = new Bomb(bombDropped.getId(), bombDropped.getPositionX(), bombDropped.getPositionY());
@@ -53,4 +52,18 @@ public class MessageFactory {
             displayAllElementsService.displayAll();
         }
     }
+
+    public void setPositionFromMessage(PlayerMoved playerMoved, Player player){
+        System.out.println(playerMoved.getDirection());
+        if (playerMoved.getDirection() == PlayerMoved.Direction.UP){
+            player.setY(player.getY()-1);
+        } else if(playerMoved.getDirection() == PlayerMoved.Direction.DOWN){
+            player.setY(player.getY()+1);
+        } else if(playerMoved.getDirection() == PlayerMoved.Direction.RIGHT){
+            player.setY(player.getX()+1);
+        } else if(playerMoved.getDirection() == PlayerMoved.Direction.LEFT){
+            player.setY(player.getX()-1);
+        }
+    }
+
 }

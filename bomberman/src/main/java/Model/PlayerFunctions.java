@@ -5,7 +5,6 @@ import application.network.mock.MockServerProxy;
 import application.network.protocol.BombDropped;
 import application.network.protocol.PlayerMoved;
 
-import java.util.Random;
 
 /**
  * Created by lukas on 08.11.2016.
