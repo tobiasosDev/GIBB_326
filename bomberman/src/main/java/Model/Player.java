@@ -1,5 +1,11 @@
 package Model;
 
+import Service.FieldService;
+import application.network.protocol.Maze;
+
+import java.lang.reflect.Field;
+import java.util.List;
+
 /**
  * Created by lukas on 08.11.2016.
  */
@@ -20,7 +26,17 @@ public class Player{
     }
 
     public void setX(int x) {
-        this.x = x;
+        Maze maze = FieldService.getInstance().getMaze();
+        List<application.network.protocol.Field> fields = maze.getFields();
+        boolean emptyfield = false;
+        for (application.network.protocol.Field field: fields) {
+            if(field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionX() == x) {
+                emptyfield = true;
+            }
+        }
+        if(emptyfield){
+            this.x = x;
+        }
     }
 
     public int getY() {
@@ -28,7 +44,16 @@ public class Player{
     }
 
     public void setY(int y) {
-        this.y = y;
+        Maze maze = FieldService.getInstance().getMaze();
+        List<application.network.protocol.Field> fields = maze.getFields();
+        boolean emptyfield = false;
+        for (application.network.protocol.Field field: fields) {
+            if(field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionY() == y) {
+                emptyfield = true;
+            }        }
+        if(emptyfield){
+            this.y = y;
+        }
     }
 
     public String getName() {

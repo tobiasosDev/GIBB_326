@@ -38,6 +38,8 @@ public class GameCreater {
     public void createMaze(StartGame updateGame){
         try {
             createMaze(updateGame.getMaze());
+            FieldService.getInstance().setMaze(updateGame.getMaze());
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
