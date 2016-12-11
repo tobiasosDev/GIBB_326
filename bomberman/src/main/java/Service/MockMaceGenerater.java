@@ -16,7 +16,7 @@ public class MockMaceGenerater {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 Field field = new Field();
-                field.setContent(Field.Content.WALL);
+                field.setContent(Field.Content.EMPTY);
                 field.setPositionX(j);
                 field.setPositionY(i);
                 fields.add(field);
