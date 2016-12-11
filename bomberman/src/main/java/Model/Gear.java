@@ -23,8 +23,6 @@ public class Gear {
             Key key1 = keys.stream().filter(KeyPredicates.isKey(key)).findFirst().orElse(null);
             if(key1 != null) {
                 key1.getPlayerFunctions().action();
-                DisplayUserService displayUserService = new DisplayUserService();
-                displayUserService.displayUsers();
             }
         }
     }
