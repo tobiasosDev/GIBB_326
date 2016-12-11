@@ -22,6 +22,7 @@ public class FieldService {
 
 
     private List<Player> players = new ArrayList<>();
+    private List<Bomb> bombs = new ArrayList<>();
     private String playerName;
 
     private FieldService() {
@@ -85,5 +86,13 @@ public class FieldService {
 
     public static FieldService getInstance(){
         return fieldService;
+    }
+
+    public List<Bomb> getBombs() {
+        return bombs;
+    }
+
+    public void setBombs(List<Bomb> bombs) {
+        this.bombs = bombs;
     }
 }

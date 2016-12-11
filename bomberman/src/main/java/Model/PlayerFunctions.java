@@ -39,7 +39,7 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
         @Override
         public void action() {
             //drop bomb
-            System.out.println("allahuakbar");
+
         }
     }
 }

@@ -3,14 +3,39 @@ package Model;
 /**
  * Created by lukas on 08.11.2016.
  */
-public class Bomb extends GameElement{
+public class Bomb{
 
-    private float explodeTime;
-    private int force;
+    private int id;
+    private int x;
+    private int y;
 
-    public Bomb(byte[] graphics, float size,float explodeTime, int force) {
-        super(graphics, size);
-        this.explodeTime = explodeTime;
-        this.force = force;
+    public Bomb(int id, int x, int y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

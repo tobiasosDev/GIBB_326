@@ -1,14 +1,13 @@
 package Controller;
 
+import Model.Bomb;
 import Model.Player;
+import Service.DisplayBombService;
 import Service.DisplayUserService;
 import Service.FieldService;
 import Service.GameCreater;
 import application.network.api.Message;
-import application.network.protocol.PlayerJoined;
-import application.network.protocol.PlayerMoved;
-import application.network.protocol.StartGame;
-import application.network.protocol.UpdateGame;
+import application.network.protocol.*;
 
 
 /**
@@ -36,7 +35,24 @@ public class MessageFactory {
             displayUserService.displayUsers();
 
         } else if(message instanceof PlayerMoved){
-
+            //Todo
+            //Validation of Movement
+            //FieldService.getInstance().getPlayer(((PlayerMoved) message).getPlayerName()).setY();
+        } else if(message instanceof BombDropped){
+            BombDropped bombDropped = (BombDropped)message;
+            DisplayBombService displayBombService = new DisplayBombService();
+            Bomb bomb = new Bomb(bombDropped.getId(), bombDropped.getPositionX(), bombDropped.getPositionY());
+            FieldService.getInstance().getBombs().add(bomb);
+            displayBombService.displayBombs();
+        } else if(message instanceof BombExploded){
+            BombExploded bombExploded = (BombExploded)message;
+            final Bomb[] bomb = {null};
+            FieldService.getInstance().getBombs().forEach(bombIn -> {
+                if(bombIn.getId() == bombExploded.getId()){
+                    bomb[0] = bombIn;
+                }
+            });
+            FieldService.getInstance().getBombs().remove(bomb[0]);
         }
     }
 }
