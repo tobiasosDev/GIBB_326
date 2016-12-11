@@ -66,16 +66,8 @@ public class GameManager {
             playerJoined.setPositionX(2);
             playerJoined.setPositionY(3);
 
-            PlayerJoined playerJoined2 = new PlayerJoined();
-            playerJoined2.setPlayerName("Test2");
-            playerJoined2.setPositionX(4);
-            playerJoined2.setPositionY(5);
-
             MockServerProxy.simulateMessage(startGame);
             MockServerProxy.simulateMessage(playerJoined);
-            MockServerProxy.simulateMessage(playerJoined2);
-
-            client.disconnect();
         }
 
         public static void main(String[] args) throws IOException, LobbyFullException, ClientIdInUseException

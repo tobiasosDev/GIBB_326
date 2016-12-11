@@ -2,10 +2,7 @@ package Controller;
 
 import Model.Bomb;
 import Model.Player;
-import Service.DisplayBombService;
-import Service.DisplayUserService;
-import Service.FieldService;
-import Service.GameCreater;
+import Service.*;
 import application.network.api.Message;
 import application.network.protocol.*;
 
@@ -14,6 +11,8 @@ import application.network.protocol.*;
  * Created by tobiasluscher on 29.11.16.
  */
 public class MessageFactory {
+
+    private DisplayAllElementsService displayAllElementsService = new DisplayAllElementsService();
 
     public void executeMessageMethod(Message message){
         if(message == null){
@@ -29,10 +28,9 @@ public class MessageFactory {
 
         } else if(message instanceof PlayerJoined){
             PlayerJoined playerJoined = (PlayerJoined)message;
-            DisplayUserService displayUserService = new DisplayUserService();
             Player player = new Player(playerJoined.getPlayerName(), playerJoined.getPositionX(), playerJoined.getPositionY());
             FieldService.getInstance().addPlayer(player);
-            displayUserService.displayUsers();
+            displayAllElementsService.displayAll();
 
         } else if(message instanceof PlayerMoved){
             //Todo
@@ -40,10 +38,9 @@ public class MessageFactory {
             //FieldService.getInstance().getPlayer(((PlayerMoved) message).getPlayerName()).setY();
         } else if(message instanceof BombDropped){
             BombDropped bombDropped = (BombDropped)message;
-            DisplayBombService displayBombService = new DisplayBombService();
             Bomb bomb = new Bomb(bombDropped.getId(), bombDropped.getPositionX(), bombDropped.getPositionY());
             FieldService.getInstance().getBombs().add(bomb);
-            displayBombService.displayBombs();
+            displayAllElementsService.displayAll();
         } else if(message instanceof BombExploded){
             BombExploded bombExploded = (BombExploded)message;
             final Bomb[] bomb = {null};
@@ -53,6 +50,7 @@ public class MessageFactory {
                 }
             });
             FieldService.getInstance().getBombs().remove(bomb[0]);
+            displayAllElementsService.displayAll();
         }
     }
 }

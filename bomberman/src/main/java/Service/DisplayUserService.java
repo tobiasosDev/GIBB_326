@@ -11,29 +11,9 @@ import javafx.scene.shape.Rectangle;
 public class DisplayUserService {
 
     public void displayUsers(){
-        int objectSum = Main.getMazeLayout().getChildren().size();
-
-        for (int i = 1; i < FieldService.getInstance().getPlayers().size(); i++) {
-            Main.getMazeLayout().getChildren().remove(i);
-        }
-
         FieldService.getInstance().getPlayers().stream().forEach(player -> {
-//            final Boolean[] exists = {false};
-//            Main.getMazeLayout().getChildren().stream().forEach( inGamePlayer -> {
-//                if(inGamePlayer.equals(getFxUser(player))){
-//                    exists[0] = true;
-//                    Main.getMazeLayout().getChildren().remove(inGamePlayer);
-//                    Main.getMazeLayout().getChildren().add(getFxUser(player));
-//                }
-//            });
-//            if(exists[0] == false) {
-//                Main.getMazeLayout().getChildren().add(getFxUser(player));
-//            }
              Main.getMazeLayout().getChildren().add(getFxUser(player));
-
         });
-
-        Main.getPrimaryStage().show();
     }
 
     private Rectangle getFxUser(Player player) {
