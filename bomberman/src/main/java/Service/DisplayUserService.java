@@ -14,6 +14,7 @@ public class DisplayUserService {
     }
 
     private Rectangle getFxUser(Player player) {
+        System.out.println(player.getX());
         Rectangle r = new Rectangle(90, 90);
         r.setFill(Color.web("red", 0.1));
         r.setArcHeight(90);

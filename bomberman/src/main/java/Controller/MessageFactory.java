@@ -60,9 +60,9 @@ public class MessageFactory {
         } else if(playerMoved.getDirection() == PlayerMoved.Direction.DOWN){
             player.setY(player.getY()+1);
         } else if(playerMoved.getDirection() == PlayerMoved.Direction.RIGHT){
-            player.setY(player.getX()+1);
+            player.setX(player.getX()+1);
         } else if(playerMoved.getDirection() == PlayerMoved.Direction.LEFT){
-            player.setY(player.getX()-1);
+            player.setX(player.getX()-1);
         }
     }
 
