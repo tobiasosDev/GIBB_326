@@ -5,6 +5,8 @@ import application.network.mock.MockServerProxy;
 import application.network.protocol.BombDropped;
 import application.network.protocol.PlayerMoved;
 
+import java.util.List;
+
 
 /**
  * Created by lukas on 08.11.2016.
@@ -47,7 +49,12 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
         @Override
         public void action() {
             Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
-            MockServerProxy.simulateMessage(new BombDropped().setId(10).setPositionX(player.getX()).setPositionY(player.getY()));
+            List<Bomb> bombs = FieldService.getInstance().getBombs();
+            boolean empty = true;
+            for (Bomb bomb : bombs) {
+                if(player.getX() == bomb.getX() && player.getY() == bomb.getY()) empty = false;
+            }
+            if(empty) MockServerProxy.simulateMessage(new BombDropped().setId(10).setPositionX(player.getX()).setPositionY(player.getY()));
             //drop bomb
 
         }
