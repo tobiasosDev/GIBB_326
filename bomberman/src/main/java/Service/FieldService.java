@@ -37,7 +37,6 @@ public class FieldService {
         this.gear = new Gear(true, keys);
 
         this.gameMode = new GameMode(60000, 3);
-        this.playerName = "Test";
     }
 
     public Maze getMaze() {

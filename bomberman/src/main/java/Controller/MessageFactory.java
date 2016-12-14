@@ -28,6 +28,9 @@ public class MessageFactory {
 
         } else if(message instanceof PlayerJoined){
             PlayerJoined playerJoined = (PlayerJoined)message;
+            if(FieldService.getInstance().getPlayers().isEmpty()){
+                FieldService.getInstance().setPlayerName(playerJoined.getPlayerName());
+            }
             Player player = new Player(playerJoined.getPlayerName(), playerJoined.getPositionX(), playerJoined.getPositionY());
             FieldService.getInstance().addPlayer(player);
             displayAllElementsService.displayAll();

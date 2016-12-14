@@ -1,8 +1,8 @@
 package Service;
 
 import Controller.MessageFactory;
+import Controller.NameGenerator;
 import Model.ServerStartGameMessage;
-import View.Main;
 import application.network.api.Network;
 import application.network.api.client.ClientIdInUseException;
 import application.network.api.client.LobbyFullException;
@@ -12,9 +12,7 @@ import application.network.mock.MockServer;
 import application.network.mock.MockServerProxy;
 import application.network.protocol.PlayerJoined;
 import application.network.protocol.StartGame;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 
@@ -62,9 +60,10 @@ public class GameManager {
             startGame.setMaze(mockMaceGenerater.createMockMace());
 
             PlayerJoined playerJoined = new PlayerJoined();
-            playerJoined.setPlayerName("Test");
-            playerJoined.setPositionX(2);
-            playerJoined.setPositionY(3);
+            NameGenerator nameGenerator = new NameGenerator();
+            playerJoined.setPlayerName(nameGenerator.getRandomName());
+            playerJoined.setPositionX(0);
+            playerJoined.setPositionY(0);
 
             MockServerProxy.simulateMessage(startGame);
             MockServerProxy.simulateMessage(playerJoined);
