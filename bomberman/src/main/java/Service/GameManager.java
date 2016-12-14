@@ -69,11 +69,4 @@ public class GameManager {
             MockServerProxy.simulateMessage(startGame);
             MockServerProxy.simulateMessage(playerJoined);
         }
-
-        public static void main(String[] args) throws IOException, LobbyFullException, ClientIdInUseException
-        {
-            GameManager example = new GameManager();
-            example.startupServer();
-            example.startupClient();
-        }
 }

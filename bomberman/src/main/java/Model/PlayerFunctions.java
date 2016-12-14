@@ -11,15 +11,17 @@ import java.util.List;
 /**
  * Created by lukas on 08.11.2016.
  */
-public enum PlayerFunctions implements PlayerFunctionsImp{
+public enum PlayerFunctions implements PlayerFunctionsImp {
 
-    UP{
+    UP {
         @Override
         public void action() {
             //move up
             //final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
             //player.setY(player.getY()-1);
-            MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.UP).setPlayerName(FieldService.getInstance().getPlayerName()));
+            if(FieldService.getInstance().checkEmptyField(PlayerMoved.Direction.UP)) {
+                MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.UP).setPlayerName(FieldService.getInstance().getPlayerName()));
+            }
         }
     }, DOWN {
         @Override
@@ -27,7 +29,9 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
             //move down
 //            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
 //            player.setY(player.getY()+1);
-            MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.DOWN).setPlayerName(FieldService.getInstance().getPlayerName()));
+            if (FieldService.getInstance().checkEmptyField(PlayerMoved.Direction.DOWN)) {
+                MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.DOWN).setPlayerName(FieldService.getInstance().getPlayerName()));
+            }
         }
     }, LEFT {
         @Override
@@ -35,7 +39,9 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
             //move left
 //            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
 //            player.setX(player.getX()-1);
-            MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.LEFT).setPlayerName(FieldService.getInstance().getPlayerName()));
+            if (FieldService.getInstance().checkEmptyField(PlayerMoved.Direction.LEFT)) {
+                MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.LEFT).setPlayerName(FieldService.getInstance().getPlayerName()));
+            }
         }
     }, RIGHT {
         @Override
@@ -43,7 +49,9 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
             //move right
 //            final Player player = FieldService.getInstance().getPlayer(FieldService.getInstance().getPlayerName());
 //            player.setX(player.getX()+1);
-            MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.RIGHT).setPlayerName(FieldService.getInstance().getPlayerName()));
+            if (FieldService.getInstance().checkEmptyField(PlayerMoved.Direction.RIGHT)) {
+                MockServerProxy.simulateMessage(new PlayerMoved().setDirection(PlayerMoved.Direction.RIGHT).setPlayerName(FieldService.getInstance().getPlayerName()));
+            }
         }
     }, DROPBOMB {
         @Override
@@ -52,9 +60,10 @@ public enum PlayerFunctions implements PlayerFunctionsImp{
             List<Bomb> bombs = FieldService.getInstance().getBombs();
             boolean empty = true;
             for (Bomb bomb : bombs) {
-                if(player.getX() == bomb.getX() && player.getY() == bomb.getY()) empty = false;
+                if (player.getX() == bomb.getX() && player.getY() == bomb.getY()) empty = false;
             }
-            if(empty) MockServerProxy.simulateMessage(new BombDropped().setId(10).setPositionX(player.getX()).setPositionY(player.getY()));
+            if (empty)
+                MockServerProxy.simulateMessage(new BombDropped().setId(10).setPositionX(player.getX()).setPositionY(player.getY()));
             //drop bomb
 
         }
