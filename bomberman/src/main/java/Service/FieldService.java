@@ -3,6 +3,7 @@ package Service;
 import Model.*;
 import Predicates.PlayerPredicates;
 import application.network.protocol.Maze;
+import application.network.protocol.PlayerMoved;
 import javafx.scene.input.KeyCode;
 
 import java.lang.reflect.Array;
@@ -37,6 +38,57 @@ public class FieldService {
         this.gear = new Gear(true, keys);
 
         this.gameMode = new GameMode(60000, 3);
+    }
+
+    public boolean checkEmptyField(PlayerMoved.Direction direction){
+        boolean emptyfield = false;
+        Player player = this.getPlayer(this.playerName);
+        if (direction == PlayerMoved.Direction.UP){
+            for (application.network.protocol.Field field : this.maze.getFields()) {
+                if (field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionY() == player.getY()-1) {
+                    emptyfield = true;
+                }
+            }
+            for (Bomb bomb : this.bombs) {
+                if (bomb.getX() == player.getX() && bomb.getY() == player.getY()-1) {
+                    emptyfield = false;
+                }
+            }
+        } else if(direction == PlayerMoved.Direction.DOWN){
+            for (application.network.protocol.Field field : this.maze.getFields()) {
+                if (field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionY() == player.getY()+1) {
+                    emptyfield = true;
+                }
+            }
+            for (Bomb bomb : this.bombs) {
+                if (bomb.getX() == player.getX() && bomb.getY() == player.getY()+1) {
+                    emptyfield = false;
+                }
+            }
+        } else if(direction == PlayerMoved.Direction.RIGHT){
+            for (application.network.protocol.Field field : this.maze.getFields()) {
+                if (field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionX() == player.getX()+1) {
+                    emptyfield = true;
+                }
+            }
+            for (Bomb bomb : this.bombs) {
+                if (bomb.getX() == player.getX()+1 && bomb.getY() == player.getY()) {
+                    emptyfield = false;
+                }
+            }
+        } else if(direction == PlayerMoved.Direction.LEFT){
+            for (application.network.protocol.Field field : this.maze.getFields()) {
+                if (field.getContent() == application.network.protocol.Field.Content.EMPTY && field.getPositionX() == player.getX()-1) {
+                    emptyfield = true;
+                }
+            }
+            for (Bomb bomb : this.bombs) {
+                if (bomb.getX() == player.getX()-1 && bomb.getY() == player.getY()) {
+                    emptyfield = false;
+                }
+            }
+        }
+        return emptyfield;
     }
 
     public Maze getMaze() {
