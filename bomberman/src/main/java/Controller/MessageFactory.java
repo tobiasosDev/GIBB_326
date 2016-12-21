@@ -15,9 +15,6 @@ public class MessageFactory {
     private DisplayAllElementsService displayAllElementsService = new DisplayAllElementsService();
 
     public void executeMessageMethod(Message message){
-        if(message == null){
-
-        }
         if(message instanceof UpdateGame){
             GameCreater creater = new GameCreater();
             creater.createMaze((UpdateGame) message);
@@ -53,6 +50,9 @@ public class MessageFactory {
             });
             FieldService.getInstance().getBombs().remove(bomb[0]);
             displayAllElementsService.displayAll();
+        }
+        if(message == null){
+
         }
     }
 
