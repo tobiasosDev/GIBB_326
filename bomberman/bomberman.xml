@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bomberman" default="all">
+  
+  
+  <property file="bomberman.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.logback-classic-1.1.8.classpath">
+    <pathelement location="${basedir}/src/main/resources/lib/logback-classic-1.1.8.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/logback-core-1.1.8.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/lombok-1.16.12.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/network-api-1.0.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/network-impl-b-1.0.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/protocol-1.0.jar"/>
+    <pathelement location="${basedir}/src/main/resources/lib/slf4j-api-1.7.21.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.jfoenix:jfoenix:1.0.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/jfoenix/jfoenix/1.0.0/jfoenix-1.0.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_junit:junit:4.12.classpath">
+    <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+  </path>
+  
+  <path id="library.network.classpath">
+    <pathelement location="${basedir}/../lib/network.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module bomberman -->
+  
+  <dirname property="module.bomberman.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.bomberman" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.bomberman" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.bomberman" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.bomberman" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="bomberman.output.dir" value="${module.bomberman.basedir}/target/classes"/>
+  <property name="bomberman.testoutput.dir" value="${module.bomberman.basedir}/target/test-classes"/>
+  
+  <path id="bomberman.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="bomberman.module.production.classpath">
+    <path refid="${module.jdk.classpath.bomberman}"/>
+    <path refid="library.maven:_com.jfoenix:jfoenix:1.0.0.classpath"/>
+    <path refid="library.logback-classic-1.1.8.classpath"/>
+    <path refid="library.network.classpath"/>
+  </path>
+  
+  <path id="bomberman.runtime.production.module.classpath">
+    <pathelement location="${bomberman.output.dir}"/>
+    <path refid="library.maven:_com.jfoenix:jfoenix:1.0.0.classpath"/>
+    <path refid="library.logback-classic-1.1.8.classpath"/>
+    <path refid="library.network.classpath"/>
+  </path>
+  
+  <path id="bomberman.module.classpath">
+    <path refid="${module.jdk.classpath.bomberman}"/>
+    <pathelement location="${bomberman.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.jfoenix:jfoenix:1.0.0.classpath"/>
+    <path refid="library.logback-classic-1.1.8.classpath"/>
+    <path refid="library.network.classpath"/>
+  </path>
+  
+  <path id="bomberman.runtime.module.classpath">
+    <pathelement location="${bomberman.testoutput.dir}"/>
+    <pathelement location="${bomberman.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_com.jfoenix:jfoenix:1.0.0.classpath"/>
+    <path refid="library.logback-classic-1.1.8.classpath"/>
+    <path refid="library.network.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.bomberman">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.bomberman">
+    <patternset refid="excluded.from.module.bomberman"/>
+  </patternset>
+  
+  <path id="bomberman.module.sourcepath">
+    <dirset dir="${module.bomberman.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="bomberman.module.test.sourcepath">
+    <dirset dir="${module.bomberman.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.bomberman" depends="compile.module.bomberman.production,compile.module.bomberman.tests" description="Compile module bomberman"/>
+  
+  <target name="compile.module.bomberman.production" depends="register.custom.compilers" description="Compile module bomberman; production classes">
+    <mkdir dir="${bomberman.output.dir}"/>
+    <javac2 destdir="${bomberman.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.bomberman}/javac">
+      <compilerarg line="${compiler.args.bomberman}"/>
+      <bootclasspath refid="bomberman.module.bootclasspath"/>
+      <classpath refid="bomberman.module.production.classpath"/>
+      <src refid="bomberman.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.bomberman"/>
+    </javac2>
+    
+    <copy todir="${bomberman.output.dir}">
+      <fileset dir="${module.bomberman.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.bomberman.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.bomberman.tests" depends="register.custom.compilers,compile.module.bomberman.production" description="compile module bomberman; test classes" unless="skip.tests">
+    <mkdir dir="${bomberman.testoutput.dir}"/>
+    <javac2 destdir="${bomberman.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.bomberman}/javac">
+      <compilerarg line="${compiler.args.bomberman}"/>
+      <bootclasspath refid="bomberman.module.bootclasspath"/>
+      <classpath refid="bomberman.module.classpath"/>
+      <src refid="bomberman.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.bomberman"/>
+    </javac2>
+    
+    <copy todir="${bomberman.testoutput.dir}">
+      <fileset dir="${module.bomberman.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.bomberman" description="cleanup module">
+    <delete dir="${bomberman.output.dir}"/>
+    <delete dir="${bomberman.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.bomberman, clean.artifact.bomberman" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.bomberman" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.bomberman" value="${basedir}/out/artifacts/bomberman"/>
+    <property name="artifact.output.bomberman:jar" value="${basedir}/out/artifacts/bomberman_jar"/>
+    <property name="artifact.output.client" value="${basedir}/out/artifacts/Client"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="artifact.temp.output.bomberman" value="${artifacts.temp.dir}/bomberman.jar"/>
+    <property name="temp.jar.path.bomberman.jar" value="${artifacts.temp.dir}/1/bomberman.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/1"/>
+    <property name="temp.jar.path.Client.jar" value="${artifacts.temp.dir}/Client.jar"/>
+    <taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpath="${jdk.home.1.8}/lib/ant-javafx.jar"/>
+  </target>
+  
+  <target name="clean.artifact.bomberman" description="clean bomberman artifact output">
+    <delete dir="${artifact.output.bomberman}"/>
+  </target>
+  
+  <target name="artifact.bomberman" depends="init.artifacts, compile.module.bomberman" description="Build &#39;bomberman&#39; artifact" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+    <mkdir dir="${artifact.output.bomberman}"/>
+    <copy todir="${artifact.temp.output.bomberman}">
+      <fileset dir="${bomberman.output.dir}"/>
+    </copy>
+    <copy file="${basedir}/src/main/resources/lib/logback-classic-1.1.8.jar" tofile="${artifact.temp.output.bomberman}/logback-classic-1.1.8.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/logback-core-1.1.8.jar" tofile="${artifact.temp.output.bomberman}/logback-core-1.1.8.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/lombok-1.16.12.jar" tofile="${artifact.temp.output.bomberman}/lombok-1.16.12.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/network-api-1.0.jar" tofile="${artifact.temp.output.bomberman}/network-api-1.0.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/network-impl-b-1.0.jar" tofile="${artifact.temp.output.bomberman}/network-impl-b-1.0.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/slf4j-api-1.7.21.jar" tofile="${artifact.temp.output.bomberman}/slf4j-api-1.7.21.jar"/>
+    <copy file="${basedir}/src/main/resources/lib/protocol-1.0.jar" tofile="${artifact.temp.output.bomberman}/protocol-1.0.jar"/>
+    <copy file="${path.variable.maven_repository}/com/jfoenix/jfoenix/1.0.0/jfoenix-1.0.0.jar" tofile="${artifact.temp.output.bomberman}/jfoenix-1.0.0.jar"/>
+    <copy file="${basedir}/../lib/network.jar" tofile="${artifact.temp.output.bomberman}/network.jar"/>
+    <fx:fileset id="all_but_bomberman" dir="${artifact.temp.output.bomberman}" includes="**/*.jar">
+      <exclude name="bomberman.jar"/>
+    </fx:fileset>
+    <fx:fileset id="all_bomberman" dir="${artifact.temp.output.bomberman}" includes="**/*.jar"/>
+    <fx:application id="bomberman_id" name="bomberman" mainClass="null"/>
+    <fx:jar destfile="${artifact.temp.output.bomberman}/bomberman.jar">
+      <fx:application refid="bomberman_id"/>
+      <fileset dir="${artifact.temp.output.bomberman}" excludes="**/*.jar"/>
+      <fx:resources>
+        <fx:fileset refid="all_but_bomberman"/>
+      </fx:resources>
+    </fx:jar>
+    <fx:deploy width="600" height="400" updatemode="background" outdir="${artifact.temp.output.bomberman}/deploy" outfile="bomberman">
+      <fx:application refid="bomberman_id"/>
+      <fx:resources>
+        <fx:fileset refid="all_bomberman"/>
+      </fx:resources>
+    </fx:deploy>
+    <copy todir="${artifact.output.bomberman}">
+      <fileset dir="${artifact.temp.output.bomberman}/deploy"/>
+    </copy>
+    <delete includeemptydirs="true">
+      <fileset dir="${artifact.temp.output.bomberman}"/>
+    </delete>
+  </target>
+  
+  <target name="artifact.bomberman:jar" depends="init.artifacts, compile.module.bomberman" description="Build &#39;bomberman:jar&#39; artifact">
+    <property name="artifact.temp.output.bomberman:jar" value="${artifacts.temp.dir}/bomberman_jar"/>
+    <mkdir dir="${artifact.temp.output.bomberman:jar}"/>
+    <jar destfile="${temp.jar.path.bomberman.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${bomberman.output.dir}"/>
+      <zipfileset src="${path.variable.maven_repository}/com/jfoenix/jfoenix/1.0.0/jfoenix-1.0.0.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/logback-classic-1.1.8.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/logback-core-1.1.8.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/lombok-1.16.12.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/network-api-1.0.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/network-impl-b-1.0.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/slf4j-api-1.7.21.jar"/>
+      <zipfileset src="${basedir}/src/main/resources/lib/protocol-1.0.jar"/>
+      <zipfileset src="${basedir}/../lib/network.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.bomberman.jar}" tofile="${artifact.temp.output.bomberman:jar}/bomberman.jar"/>
+  </target>
+  
+  <target name="artifact.client" depends="init.artifacts, compile.module.bomberman" description="Build &#39;Client&#39; artifact">
+    <property name="artifact.temp.output.client" value="${artifacts.temp.dir}/Client"/>
+    <mkdir dir="${artifact.temp.output.client}"/>
+    <jar destfile="${temp.jar.path.Client.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${bomberman.output.dir}"/>
+      <zipfileset file="${basedir}/../lib/network.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/logback-classic-1.1.8.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/logback-core-1.1.8.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/lombok-1.16.12.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/network-api-1.0.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/network-impl-b-1.0.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/slf4j-api-1.7.21.jar"/>
+      <zipfileset file="${basedir}/src/main/resources/lib/protocol-1.0.jar"/>
+      <zipfileset file="${path.variable.maven_repository}/com/jfoenix/jfoenix/1.0.0/jfoenix-1.0.0.jar"/>
+    </jar>
+    <copy file="${temp.jar.path.Client.jar}" tofile="${artifact.temp.output.client}/Client.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.bomberman, artifact.bomberman:jar, artifact.client" description="Build all artifacts">
+    <mkdir dir="${artifact.output.bomberman:jar}"/>
+    <copy todir="${artifact.output.bomberman:jar}">
+      <fileset dir="${artifact.temp.output.bomberman:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.client}"/>
+    <copy todir="${artifact.output.client}">
+      <fileset dir="${artifact.temp.output.client}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

@@ -4,6 +4,8 @@ package Controller;
  * Created by lukas on 09.11.2016.
  */
 import Service.GameManager;
+import application.network.api.client.ClientIdInUseException;
+import application.network.api.client.LobbyFullException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +23,12 @@ public class MenuController {
     @FXML protected void startGame(ActionEvent event) {
         GameManager gameManager = new GameManager();
         try {
-            gameManager.startupServer();
+            gameManager.startupClient();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LobbyFullException e) {
+            e.printStackTrace();
+        } catch (ClientIdInUseException e) {
             e.printStackTrace();
         }
     }
