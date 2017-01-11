@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="bomberman.jnlp">
+  <information>
+    <title>bomberman</title>
+    <vendor>Unknown</vendor>
+    <description>bomberman</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="bomberman.jar" size="33810" download="eager" />
+    <jar href="jfoenix-1.0.0.jar" size="2184031" download="eager" />
+    <jar href="lib/logback-classic-1.1.8.jar" size="305137" download="eager" />
+    <jar href="lib/logback-core-1.1.8.jar" size="470633" download="eager" />
+    <jar href="lib/lombok-1.16.12.jar" size="1413722" download="eager" />
+    <jar href="lib/network-api-1.0.jar" size="7906" download="eager" />
+    <jar href="lib/network-impl-b-1.0.jar" size="18669" download="eager" />
+    <jar href="lib/protocol-1.0.jar" size="11252" download="eager" />
+    <jar href="lib/slf4j-api-1.7.21.jar" size="41071" download="eager" />
+    <jar href="logback-classic-1.1.8.jar" size="305137" download="eager" />
+    <jar href="logback-core-1.1.8.jar" size="470633" download="eager" />
+    <jar href="lombok-1.16.12.jar" size="1413722" download="eager" />
+    <jar href="network-api-1.0.jar" size="7906" download="eager" />
+    <jar href="network-impl-b-1.0.jar" size="18669" download="eager" />
+    <jar href="network.jar" size="5015" download="eager" />
+    <jar href="protocol-1.0.jar" size="11252" download="eager" />
+    <jar href="slf4j-api-1.7.21.jar" size="41071" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="600" main-class="View.Main"  name="bomberman" />
+  <update check="background"/>
+</jnlp>
